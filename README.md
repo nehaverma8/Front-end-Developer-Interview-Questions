@@ -176,10 +176,10 @@ This is because of something called as domain sharding. Ideally browsers all all
 
 * Do your best to describe the process from the time you type in a website's URL to it finishing loading on your screen.
 When we enter the url in the browser, the browser checks the browser cache, os cache , router cache in that order for the iP address. If the IP address does not exists, the browser checks the ISP provider's DNS Cache. If its not present, the ISP checks the DNS resolver for the ip address. DNS resolver checks the Root server and TLD servers and then the actual name servers for the IP address of the domain and this is sent back to the user's operating system. The OS sends the ip address to the browser which then 
-* * initiates a TCP connection to start loading the page. (Client -> SYN -> Server; Server -> ACK->SYN -> Client; Client -> ACK -> server); 
-* * client sends a HTTP request to the server with http request headers
-* * server processes the HTTP request and sends a http response with response headers and content
-* * client loads the content of the response
+  * initiates a TCP connection to start loading the page. (Client -> SYN -> Server; Server -> ACK->SYN -> Client; Client -> ACK -> server); 
+  * client sends a HTTP request to the server with http request headers
+  * server processes the HTTP request and sends a http response with response headers and content
+  * client loads the content of the response
 http://blog.catchpoint.com/2014/07/01/dns-lookup-domain-name-ip-address/
 
 * How does HTTP / HTTPS work? 
