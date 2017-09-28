@@ -165,14 +165,32 @@ duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
 #### Performance Questions:
 
 * What tools would you use to find a performance bug in your code?
+Google Chrome developer tools. 
 * What are some ways you may improve your website's scrolling performance?
 * Explain the difference between layout, painting and compositing.
 
 #### Network Questions:
 
 * Traditionally, why has it been better to serve site assets from multiple domains?
+This is because of something called as domain sharding. Ideally browsers all allowed to make a certain parallel connections to one domain. Usually it is 6. Now, if you web page has 30 assets to download to render your page, it will take the browser 5 sets of requests to download all assets thereby affecting the user experience. So the best practice is to move your assets liek images, js, css files to a different server so browser can download them in parallel. 
+
 * Do your best to describe the process from the time you type in a website's URL to it finishing loading on your screen.
+When we enter the url in the browser, the browser checks the browser cache, os cache , router cache in that order for the iP address. If the IP address does not exists, the browser checks the ISP provider's DNS Cache. If its not present, the ISP checks the DNS resolver for the ip address. DNS resolver checks the Root server and TLD servers and then the actual name servers for the IP address of the domain and this is sent back to the user's operating system. The OS sends the ip address to the browser which then 
+* * initiates a TCP connection to start loading the page. (Client -> SYN -> Server; Server -> ACK->SYN -> Client; Client -> ACK -> server); 
+* * client sends a HTTP request to the server with http request headers
+* * server processes the HTTP request and sends a http response with response headers and content
+* * client loads the content of the response
+http://blog.catchpoint.com/2014/07/01/dns-lookup-domain-name-ip-address/
+
+* How does HTTP / HTTPS work? 
+HTTP allows communication between client and server usually over TCP. The browser inistaes a HTTP request which conists of HTTP headers, HTTP method, and body. The server processes the request and responds with a HTTP response which conists of HTTP response codes and content. 
+
+HTTPS: Secure HTTP. It creates a secure channel between the browser and client thus protectingn against tampering of data and keeps the data flow secure and private. 
+Browser sends a http request to server. The server responds with a SSL certificate. The browser checks the validity of the certifcate against the TCA and extracts the publickey from teh certiticate. It then encyrpts a shared key with the public key and sends it to the server. The server decrypts it with the private key and use this shared key for encrypting data transfer. 
+
+
 * What are the differences between Long-Polling, Websockets and Server-Sent Events?
+
 * Explain the following request and response headers:
   * Diff. between Expires, Date, Age and If-Modified-...
   * Do Not Track
@@ -181,6 +199,7 @@ duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
   * ETag
   * X-Frame-Options
 * What are HTTP methods? List all HTTP methods that you know, and explain them.
+get, post, put, delete 
 
 #### Coding Questions:
 
@@ -188,27 +207,39 @@ duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
 ```javascript
 var foo = 10 + '20';
 ```
-
+//1020
 *Question: What will be the output of the code below?*
 ```javascript
 console.log(0.1 + 0.2 == 0.3);
 ```
+\\false
 
 *Question: How would you make this work?*
 ```javascript
 add(2, 5); // 7
 add(2)(5); // 7
 ```
+```javascript
+function add(x,y){
+    if(y == "undefined"){
+      return function(y){
+        return x+y;
+      }
+    }
+    return x+y;
+}
 
+```
 *Question: What value is returned from the following statement?*
 ```javascript
 "i'm a lasagna hog".split("").reverse().join("");
 ```
-
+//reversed 
 *Question: What is the value of `window.foo`?*
 ```javascript
 ( window.foo || ( window.foo = "bar" ) );
 ```
+//bar
 
 *Question: What is the outcome of the two alerts below?*
 ```javascript
@@ -219,20 +250,22 @@ var foo = "Hello";
 })();
 alert(foo + bar);
 ```
-
+// Hello World
+// Not defined. ReferenceError
 *Question: What is the value of `foo.length`?*
 ```javascript
 var foo = [];
 foo.push(1);
 foo.push(2);
 ```
-
+//2 
 *Question: What is the value of `foo.x`?*
 ```javascript
 var foo = {n: 1};
 var bar = foo;
 foo.x = foo = {n: 2};
 ```
+//Undefined. 
 
 *Question: What does the following code print?*
 ```javascript
@@ -242,7 +275,7 @@ setTimeout(function() {
 }, 0);
 console.log('three');
 ```
-
+//Output: one , three, two
 #### Fun Questions:
 
 * What's a cool project that you've recently worked on?
