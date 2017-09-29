@@ -134,6 +134,13 @@ This file contains a number of front-end interview questions that can be used wh
 ```javascript
 duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
 ```
+```javascript
+function duplicate(arr){
+return arr.concat(arr);
+}
+```
+
+
 * Why is it called a Ternary expression, what does the word "Ternary" indicate?
 * What is `"use strict";`? what are the advantages and disadvantages to using it?
 * Create a for loop that iterates up to `100` while outputting **"fizz"** at multiples of `3`, **"buzz"** at multiples of `5` and **"fizzbuzz"** at multiples of `3` and `5`
@@ -142,18 +149,107 @@ duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
 * Explain what a single page app is and how to make one SEO-friendly.
 * What is the extent of your experience with Promises and/or their polyfills?
 * What are the pros and cons of using Promises instead of callbacks?
+
 * What are some of the advantages/disadvantages of writing JavaScript code in a language that compiles to JavaScript?
+
+
 * What tools and techniques do you use debugging JavaScript code?
+//chrome dev tools.
 * What language constructions do you use for iterating over object properties and array items?
+//for loops
+var array = new Array[1,2,3,4];
+var Employee = {class: "A", name:"Name"};
+for(let ind in array){ console.log(ind); };
+for(let i = 0;i<array.length; i++) { console.log(array[i]); };
+for(let key in Employee){ console.log(key); };
+
+//for each
+array.forEach(function(key){ console.log(key); };
+
+Object.keys(Employee).forEach(function(key) {
+        console.log(key+" = " + Employee[key]);
+    });
+
 * Explain the difference between mutable and immutable objects.
-  * What is an example of an immutable object in JavaScript?
+  * What is an example of an immutable object in JavaScript? - strings , numbers.
   * What are the pros and cons of immutability?
   * How can you achieve immutability in your own code?
+  Mutable objects are whose state can be changed after creation. like objetcs, arrays etc
+  Immutable objects are whose state cannot be changed after creation. like strings, numbers
+  
+  //for immutable objects like strings and array
+  let a = 1;
+  let b  = a;
+  a=3;
+  console.log (b);//1
+  console.log(a); //3
+  console.log(a===b) //false
+  
+  for mutable objects like objects and arrays;
+  
+  let a = { foo: "hello"};
+  let b  = a;
+  a.foo = "bar";
+  console.log (b);// {foo:"bar"}
+  console.log(a); //1 {foo:"bar"}
+  console.log(a===b) //true
+  https://benmccormick.org/2016/06/04/what-are-mutable-and-immutable-data-structures-2/
+  
+  so when value is changed, for mutable objects, all refrences are updated.
+  for immutable since value cannot be changed, a new object is assigned.
+  
 * Explain the difference between synchronous and asynchronous functions.
+syncronoush functions are those that wait to be completed .asyncronous are those that get placed on task queue and gets executed when the call stack is empty.
+
 * What is event loop?
-  * What is the difference between call stack and task queue?
+  * What is the difference between call stack and task queue?
+Javascript runtime has a heap and a call stack. 
+Heap is where memory allocation happens and is where objects are stored.
+Call Stack: call stack is a data strcuture that records where in the program we are. In JS, the functions calls form a stack of frames. 
+function foo{}; 
+function bar(){ foo(); };  
+bar(); 
+// 1. bar is placed on call stack along with arguments and local vars.
+// 2. foo is placed on top of stack with arguments and local vars. 
+// 3. when foo returns, it is popped out of stack 
+// 4. when bar returns, it is popped out and stack is empty. 
+
+Javascript is single threaded. so its runtime is single threaded. so one call stack. so one thing at time. 
+
+Task Queue is part of runtime which contains a list of messages to be exceuted. A function (Callback) is associated with each message. when the call stack has enough capacity, the event loop pulls the message from teh qeue and puts it in the stack to be executed. 
+
+event loop is responsble to check if teh queue has any messages. if it does, it pulls out the message and places it in the call stack for execution. 
+while (queue.waitForMessage()) {
+  queue.processNextMessage();
+}
+
+setTimeout(function(){
+console.log("hello"); 
+}, 0);
+this doesn't mean that it will be exected after 0 millisecs. what it means is it will be executed when the call stack is empty. 
+
 * Explain the differences on the usage of `foo` between `function foo() {}` and `var foo = function() {}`
+the first is an named function. 
+foo();  //works because function statements are hoisted
+function foo();
+
+the second foo is a variable with an anonymous function assigned to it. 
+foo(); // does not work because function expressions are not hoisted.
+var foo = function(){};
+a function expression can be immediately run. //IIFE
+//Pattern: When functions are used only once : IIFE
+(function(){
+})();
+
+one more way of creating functions is 
+var foo = new Function(); // less efficient than other too. 
+
+var foo = function footoo(){}; // footoo(); // will give an error
 * What are the differences between variables created using `let`, `var` or `const`?
+var is the way of creatign javascript that existed before ES6. var creates an object whose scope is teh function where it is declared or global scope. 
+let is to define variables whose scope is the block of code where it is declared. 
+const is to define variables whose values don't change
+
 
 #### Testing Questions:
 
